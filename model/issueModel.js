@@ -1,12 +1,12 @@
 const { executeQuery } = require('../db/execute-sql-query');
 
-async function createIssue(i_title, i_desc, p_id, created_at) {
+async function createIssue(i_title, i_desc, p_id, created_at, priority) {
     try {
         if (typeof (i_title) == 'undefined' && typeof (p_id) == 'undefined') {
             throw new Error('Incomplete details to create a new Issue');
         }
-        const query = 'INSERT INTO issues(i_title,i_desc,p_id,created_at)VALUES(?,?,?,?);';
-        const params = [i_title, i_desc, p_id, created_at];
+        const query = 'INSERT INTO issues(i_title,i_desc,p_id,created_at,priority)VALUES(?,?,?,?,?);';
+        const params = [i_title, i_desc, p_id, created_at, priority];
         const createIssueResults = await executeQuery(query, params);
         return createIssueResults
     } catch (error) {
@@ -34,7 +34,7 @@ async function getIssues(projectId) {
         if (typeof (projectId) == 'undefined') {
             throw new Error('Project Id is Null! Cannot fetch Issues');
         }
-        const query = 'SELECT i_id,i_title,i_desc,created_at FROM issues WHERE p_id=? ORDER BY i_id ASC;';
+        const query = 'SELECT i_id,i_title,i_desc,created_at, priority FROM issues WHERE p_id=? ORDER BY i_id ASC;';
         const params = [projectId];
         const getIssuesResults = await executeQuery(query, params);
         return getIssuesResults;
