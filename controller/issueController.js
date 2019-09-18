@@ -4,13 +4,13 @@ const issueModel = require('../model/issueModel');
 
 async function createIssue(req, res) {
     try {
-        const { i_title, i_desc, p_id, priority } = req.body;
+        const { i_title, i_desc, p_id, priority,userId } = req.body;
         const created_at = new Date();
         if (typeof (i_title) == 'undefined' && typeof (p_id) == 'undefined' && typeof (priority) == 'undefined') {
             throw new Error('Incomplete details to create a new Issue');
         }
         const createIssueResults = await issueModel.createIssue(
-            i_title, i_desc, p_id, created_at, priority
+            i_title, i_desc, p_id, created_at, priority,userId
         );
         res.status(200).send(createIssueResults);
     } catch (error) {

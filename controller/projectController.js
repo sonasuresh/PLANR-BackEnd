@@ -56,8 +56,8 @@ async function deleteProject(req, res) {
 
 async function getProjects(req, res) {
 	try {
-		const getProjectrResults = await projectModel.getProjects()
-		res.status(200).send(getProjectrResults)
+		const getProjectResults = await projectModel.getProjects()
+		res.status(200).send(getProjectResults)
 	} catch (error) {
 		logger.error(error.message)
 		res.status(500).send(error)
