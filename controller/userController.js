@@ -5,6 +5,7 @@ var jwt = require('jsonwebtoken')
 
 async function createUser(req, res) {
 	try {
+		console.log(req.body)
 		const { userId, password } = req.body
 		//const created_at = new Date();
 		if (typeof userId == 'undefined' && typeof password == 'undefined') {
